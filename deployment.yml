@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: project
+spec:
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: my-web-app
+
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        app: my-web-app
+    spec:
+      containers:
+        - image: mohamedkbx/nginx-test
+          name: nginx-container
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+            requests:
+              memory: "100Mi"
